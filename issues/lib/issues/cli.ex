@@ -38,8 +38,27 @@ defmodule Issues.CLI do
     """
     System.halt(0)
   end
-
   def process({user, project, count}) do
     Issues.GithubIssues.fetch(user, project)
+      |> decode_response
+      |> convert_to_list_of_hashdicts
+      |> sort_into_ascending_order
+      |> Enum.take(count)
+  end
+
+  def decode_response({:ok, body}), do: Jsonex.decode(body)
+  def decode_response({:error, msg}) do
+    error = Jsonex.decode(msg)
+    IO.puts "Error fetching from Github: #{error}"
+    System.halt(2)
+  end
+
+  def convert_to_list_of_hashdicts(list) do
+    list |> Enum.map(&HashDict.new/1)
+  end
+
+  def sort_into_ascending_order(list_of_issues) do
+    Enum.sort list_of_issues,
+      fn i1, i2 -> i1["created_at"] <= i2["created_at"] end
   end
 end
