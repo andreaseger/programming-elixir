@@ -44,6 +44,7 @@ defmodule Issues.CLI do
       |> convert_to_list_of_hashdicts
       |> sort_into_ascending_order
       |> Enum.take(count)
+      |> print_table_for_columns(["number", "created_at", "title"])
   end
 
   def decode_response({:ok, body}), do: Jsonex.decode(body)
@@ -61,4 +62,9 @@ defmodule Issues.CLI do
     Enum.sort list_of_issues,
       fn i1, i2 -> i1["created_at"] <= i2["created_at"] end
   end
+  def print_table_for_columns(data, columns) do
+    # data_by_columns = lc column inlist columns, do: Enum.map(data,&(&1[column]))
+    # IO.inspect data_by_columns
+  end
+
 end
