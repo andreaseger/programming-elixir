@@ -5,6 +5,8 @@ defmodule Issues.Mixfile do
     [ app: :issues,
       version: "0.0.1",
       elixir: "~> 0.10.3",
+      name: "Issues",
+      source: "https://github.com/sch1zo/programming-elixir/issues",
       deps: deps ]
   end
 
@@ -19,8 +21,9 @@ defmodule Issues.Mixfile do
   # { :foobar, "~> 0.1", git: "https://github.com/elixir-lang/foobar.git" }
   defp deps do
     [
-      { :httpotion, github: "myfreeweb/httpotion"},
-      { :jsonex,"2.0",[github: "marcelog/jsonex", tag: "2.0"]}
+      { :httpotion,     github: "myfreeweb/httpotion"},
+      { :jsonex, "2.0", github: "marcelog/jsonex", tag: "2.0"},
+      { :ex_doc,        github: "elixir-lang/ex_doc"}
     ]
   end
 end
