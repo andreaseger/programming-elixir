@@ -6,6 +6,7 @@ defmodule Issues.CLI do
   table of the last _n_ issues in a github project
   """
 
+  import Issues.TableFormatter, only: [print_table_for_columns: 2]
   def run(argv) do
     argv
       |> parse_args
@@ -62,9 +63,4 @@ defmodule Issues.CLI do
     Enum.sort list_of_issues,
       fn i1, i2 -> i1["created_at"] <= i2["created_at"] end
   end
-  def print_table_for_columns(data, columns) do
-    # data_by_columns = lc column inlist columns, do: Enum.map(data,&(&1[column]))
-    # IO.inspect data_by_columns
-  end
-
 end
