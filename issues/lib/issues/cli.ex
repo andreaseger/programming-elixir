@@ -48,9 +48,11 @@ defmodule Issues.CLI do
       |> print_table_for_columns(["number", "created_at", "title"])
   end
 
-  def decode_response({:ok, body}), do: Jsonex.decode(body)
+  # def decode_response({:ok, body}), do: Jsonex.decode(body)
+  def decode_response({:ok, body}), do: JSON.decode!(body)
   def decode_response({:error, msg}) do
-    error = Jsonex.decode(msg)
+    {:ok, error} = JSON.decode(msg)
+    # error = Jsonex.decode(msg)
     IO.puts "Error fetching from Github: #{error}"
     System.halt(2)
   end

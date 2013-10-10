@@ -22,7 +22,8 @@ defmodule Issues.Mixfile do
   defp deps do
     [
       { :httpotion,     github: "myfreeweb/httpotion"},
-      { :jsonex, "2.0", github: "marcelog/jsonex", tag: "2.0"},
+      { :json,          github: "cblage/elixir-json"},
+      # { :jsonex, "2.0", github: "marcelog/jsonex", tag: "2.0"},
       { :ex_doc,        github: "elixir-lang/ex_doc"}
     ]
   end
